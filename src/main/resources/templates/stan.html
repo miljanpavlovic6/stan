@@ -1,0 +1,107 @@
+
+<div ng-controller="stanController as ctrl">
+
+	<div id="staticBloc">
+		<div class="media">
+			<div class="media-left media-top">
+				<a href="{{ctrl.selectedStavka.picture}}"> <img
+					class="slikaStan" ng-src="{{ctrl.selectedStavka.picture}}" alt=""></img>
+				</a>
+			</div>
+			<div class="media-body">
+				<p>
+					<strong>ID:</strong> <span>{{ctrl.selectedStavka.id}}</span>
+				</p>
+
+				<p>
+					<strong>Naziv:</strong> <span>{{ctrl.selectedStavka.name}}</span>
+				</p>
+				<p>
+					<strong>Opis:</strong> <span>{{ctrl.selectedStavka.opis}}</span>
+				</p>
+				<p>
+					<strong>Cena:</strong> <span>{{ctrl.selectedStavka.cena}}</span>
+				</p>
+				<p>
+					<strong>Slika:</strong> <span>{{ctrl.selectedStavka.picture}}</span>
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid secondContainer">
+
+
+		<div class="row">
+			<div class="panel panel-primary smanji">
+				<div class="panel-heading">
+					<span> <span class="titleDodaj">Dodaj sobu </span><i
+						ng-click="ctrl.addSoba()" title="Dodaj"
+						class="fa fa-plus fa-2x faIkone" aria-hidden="true"></i>
+					</span>
+				</div>
+			</div>
+
+			<div class="alert alert-success" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
+			<div class="alert alert-danger" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
+			<p class="headTitle">
+				<span ng-show="ctrl.editMode">Upisi naziv prostorije: </span> <span>
+					<input ng-show="ctrl.editMode" type="text"
+					ng-model="ctrl.selectedSoba.name">
+				</span>
+				<button type="button" class="btn btn-success"
+					ng-show="ctrl.editMode" ng-click="ctrl.saveSoba()">Sacuvaj</button>
+				<button type="button" class="btn btn-danger"
+					ng-show="ctrl.editMode" ng-click="ctrl.tooggleEditMode()">Odustani</button>
+			</p>
+			<div class="col-md-3 sobaDiv" ng-repeat="s in ctrl.sobe">
+
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+
+						<span class="headTitle">{{s.name}}</span> <i
+							ng-click="ctrl.izmeniSoba(s.id)" title="Izmeni"
+							class="fa fa-pencil-square fa-2x faIkone" aria-hidden="true"></i>
+						<i ng-click="ctrl.deleteSoba(s.id)" title="Obri&#353i"
+							class="fa fa-trash fa-2x faIkone" aria-hidden="true"></i>
+					</div>
+
+					<div class="panel-body" ng-repeat="c in s.stavke">
+						<span class="h1Class">{{ $index + 1 }}</span> <span class="pClass">{{c.name}}</span>
+						<i class="fa fa-file-text-o fa-2x"
+							ng-click="ctrl.selectStavka(c.id)" title="Detalji"
+							aria-hidden="true"></i>
+						<p class="rightP">
+							<strong>Opis:</strong>{{c.opis}}
+						</p>
+
+						<p class="rightP">
+							<strong>Cena:</strong>{{c.cena}}
+						</p>
+
+					</div>
+
+					<div class="panel-footer">Ukupna cena:</div>
+				</div>
+
+
+
+
+
+
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+</div>

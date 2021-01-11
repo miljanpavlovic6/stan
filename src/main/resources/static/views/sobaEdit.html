@@ -1,0 +1,192 @@
+<div ng-controller="stanEditController as ctrl">
+
+
+
+	<div class="container-fluid>
+
+
+		<div class="row">
+
+
+		<div class="alert alert-success" ng-if="ctrl.successMessage">{{ctrl.successMessage}}</div>
+		<div class="alert alert-danger" ng-if="ctrl.errorMessage">{{ctrl.errorMessage}}</div>
+
+
+		<div class="col-md-4 sobaDiv">
+			<form>
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<p>
+							<input ng-model="selectedSoba.name" class="form-control"
+								maxlength="25">
+						</p>
+
+						<button ng-click="izmeniSoba()" type="button"
+							class="btn btn-primary">Sacuvaj</button>
+						<button ng-click="ctrl.odustani()" type="button"
+							class="btn btn-primary">Odustani</button>
+					</div>
+			</form>
+
+
+
+			<div class="panel-body" ng-repeat="a in stavke">
+
+
+				<span class="h1Class">{{ $index + 1 }}</span> <span class="pClass">{{a.name}}</span>
+				<i class="fa fa-file-text-o fa-2x"
+					ng-click="ctrl.selectStavka(a.id)" title="Detalji"
+					aria-hidden="true"></i> <i ng-click="ctrl.deleteStavka(a.id)"
+					title="Obri&#353i" class="fa fa-trash fa-2x faIkone"
+					aria-hidden="true"></i>
+				<p class="rightP">
+					<strong>Opis:</strong>{{a.opis}}
+				</p>
+
+				<p class="rightP">
+					<strong>Cena:</strong>{{a.cena | number:2}}
+				</p>
+
+			</div>
+
+			<div class="panel-footer">Ukupna cena: {{getTotal() |currency : "RSD " : 2}}</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<form>
+				<div class="row justify-content-center">
+					<h1>Dodavanje stavki</h1>
+					<div class="col-auto">
+						<label>Naziv stavke</label> <input ng-model="novStavka.name"
+							type="text" class="form-control">
+					</div>
+					<div class="col">
+						<label>Opis</label> <input ng-model="novStavka.opis" type="text"
+							class="form-control">
+					</div>
+					<div class="col">
+						<label>Cena</label> <input ng-model="novStavka.cena" type="text"
+							class="form-control">
+					</div>
+					<div class="col">
+						<label>Slika</label> <input ng-model="novStavka.picture"
+							type="text" class="form-control">
+					</div>
+
+					<div class="col">
+						<label>SobaID</label> <select ng-model="novStavka.sobaId"
+							class="form-control">
+							<option>{{selectedSoba.id}}</option>
+						</select>
+					</div>
+
+				</div>
+				<br>
+				<button ng-click="dodaj()" type="button" class="btn btn-primary">Dodaj</button>
+			</form>
+
+
+			<div class="media">
+				<div class="media-left media-top">
+					<a href="{{ctrl.selectedStavka.picture}}"> <img
+						class="slikaStan" ng-src="{{ctrl.selectedStavka.picture}}" alt=""></img>
+					</a>
+				</div>
+				<div class="media-body">
+					<p>
+						<strong>ID:</strong> <span ng-hide="ctrl.editMode">{{ctrl.selectedStavka.id}}</span>
+						<input ng-show="ctrl.editMode" type="text"
+							ng-model="ctrl.selectedStavka.id">
+					</p>
+					<label>SobaID</label>
+					<div class="form-row">
+						<div class="col-7">
+							<select ng-model="ctrl.selectedStavka.sobaId"
+								class="custom-select mr-sm-2">
+								<option selected>{{selectedSoba.id}}</option>
+							</select>
+						</div>
+					</div>
+
+					<p>
+						<strong>Naziv:</strong> <span ng-hide="ctrl.editMode">{{ctrl.selectedStavka.name}}</span>
+						<input ng-show="ctrl.editMode" type="text"
+							ng-model="ctrl.selectedStavka.name">
+					</p>
+					<p>
+						<strong>Opis:</strong> <span ng-hide="ctrl.editMode">{{ctrl.selectedStavka.opis}}</span>
+						<input ng-show="ctrl.editMode" type="text"
+							ng-model="ctrl.selectedStavka.opis">
+					</p>
+					<p>
+						<strong>Cena:</strong> <span ng-hide="ctrl.editMode">{{ctrl.selectedStavka.cena}}</span>
+						<input ng-show="ctrl.editMode" type="text"
+							ng-model="ctrl.selectedStavka.cena">
+					</p>
+					<p>
+						<strong>Slika:</strong> <span ng-hide="ctrl.editMode">{{ctrl.selectedStavka.picture}}</span>
+						<input ng-show="ctrl.editMode" type="text"
+							ng-model="ctrl.selectedStavka.picture">
+					</p>
+
+				</div>
+				<button type="button" class="btn btn-primary"
+					ng-hide="ctrl.editMode" ng-click="ctrl.tooggleEditMode()">Izmeni</button>
+				<button type="button" class="btn btn-success"
+					ng-show="ctrl.editMode" ng-click="ctrl.saveEditStavka()">Sacuvaj</button>
+				<button type="button" class="btn btn-warning"
+					ng-show="ctrl.editMode" ng-click="ctrl.tooggleEditMode()">Odustani</button>
+			</div>
+
+		</div>
+
+
+	</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
